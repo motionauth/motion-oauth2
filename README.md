@@ -1,12 +1,7 @@
 # OAuth2
 
-[![Gem Version](http://img.shields.io/gem/v/motionauth-oauth2.svg)][gem]
-[![Build Status](http://img.shields.io/travis/motionauth/oauth2.svg)][travis]
-[![Code Climate](http://img.shields.io/codeclimate/github/motionauth/oauth2.svg)][codeclimate]
-
-[gem]: https://rubygems.org/gems/motionauth-oauth2
-[travis]: http://travis-ci.org/motionauth/oauth2
-[codeclimate]: https://codeclimate.com/github/motionauth/oauth2
+[![Build Status](https://travis-ci.org/motionauth/oauth2.svg)](https://travis-ci.org/motionauth/oauth2)
+[![Code Climate](https://codeclimate.com/github/motionauth/oauth2/badges/gpa.svg)](https://codeclimate.com/github/motionauth/oauth2)
 
 A [RubyMotion](http://www.rubymotion.com) fork of the existing
 [OAuth2](https://github.com/intridea/oauth2) RubyGem that works for iOS and OS X.
