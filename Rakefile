@@ -26,5 +26,5 @@ require "webstub"
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = "motion-oauth2"
+  app.name = "motionauth-oauth2"
 end
