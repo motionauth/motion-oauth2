@@ -22,7 +22,6 @@ require "guard/motion"
 require "motion_print"
 require "motion-redgreen"
 require "RackMotion"
-require "webstub"
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
