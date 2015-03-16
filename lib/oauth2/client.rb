@@ -1,6 +1,3 @@
-require 'faraday'
-require 'logger'
-
 module OAuth2
   # The OAuth2::Client class
   class Client
@@ -16,27 +13,27 @@ module OAuth2
     # @param [String] client_secret the client_secret value
     # @param [Hash] opts the options to create the client with
     # @option opts [String] :site the OAuth2 provider site host
-    # @option opts [String] :authorize_url ('/oauth/authorize') absolute or relative URL path to the Authorization endpoint
-    # @option opts [String] :token_url ('/oauth/token') absolute or relative URL path to the Token endpoint
+    # @option opts [String] :authorize_url ("/oauth/authorize") absolute or relative URL path to the Authorization endpoint
+    # @option opts [String] :token_url ("/oauth/token") absolute or relative URL path to the Token endpoint
     # @option opts [Symbol] :token_method (:post) HTTP method to use to request token (:get or :post)
     # @option opts [Hash] :connection_opts ({}) Hash of connection options to pass to initialize Faraday with
     # @option opts [FixNum] :max_redirects (5) maximum number of redirects to follow
     # @option opts [Boolean] :raise_errors (true) whether or not to raise an OAuth2::Error
     #  on responses with 400+ status codes
-    # @yield [builder] The Faraday connection builder
-    def initialize(client_id, client_secret, options = {}, &block)
+    def initialize(client_id, client_secret, options = {})
       opts = options.dup
       @id = client_id
       @secret = client_secret
       @site = opts.delete(:site)
       ssl = opts.delete(:ssl)
-      @options = {:authorize_url    => '/oauth/authorize',
-                  :token_url        => '/oauth/token',
-                  :token_method     => :post,
-                  :connection_opts  => {},
-                  :connection_build => block,
-                  :max_redirects    => 5,
-                  :raise_errors     => true}.merge(opts)
+      @options = {
+        authorize_url:   "/oauth/authorize",
+        token_url:       "/oauth/token",
+        token_method:    :post,
+        connection_opts: {},
+        max_redirects:   5,
+        raise_errors:    true
+      }.merge(opts)
       @options[:connection_opts][:ssl] = ssl if ssl
     end
 
@@ -48,15 +45,9 @@ module OAuth2
       @site = value
     end
 
-    # The Faraday connection object
+    # The OAuth2::Connection object
     def connection
-      @connection ||= begin
-        conn = Faraday.new(site, options[:connection_opts])
-        conn.build do |b|
-          options[:connection_build].call(b)
-        end if options[:connection_build]
-        conn
-      end
+      @connection ||= Connection.new(site, options[:connection_opts])
     end
 
     # The authorize endpoint URL of the OAuth2 provider
@@ -84,16 +75,12 @@ module OAuth2
     # @option opts [Boolean] :raise_errors whether or not to raise an OAuth2::Error on 400+ status
     #   code response for this request.  Will default to client option
     # @option opts [Symbol] :parse @see Response::initialize
-    # @yield [req] The Faraday request
+    # @yield [req] The OAuth2::Request
     def request(verb, url, opts = {}) # rubocop:disable CyclomaticComplexity, MethodLength
-      connection.response :logger, ::Logger.new($stdout) if ENV['OAUTH_DEBUG'] == 'true'
+      # connection.response :logger, ::Logger.new($stdout) if ENV["OAUTH_DEBUG"] == "true"
 
       url = connection.build_url(url, opts[:params]).to_s
-
-      response = connection.run_request(verb, url, opts[:body], opts[:headers]) do |req|
-        yield(req) if block_given?
-      end
-      response = Response.new(response, :parse => opts[:parse])
+      response = connection.run_request(verb, url, opts[:body], opts[:headers], opts[:parse])
 
       case response.status
       when 301, 302, 303, 307
@@ -104,7 +91,7 @@ module OAuth2
           verb = :get
           opts.delete(:body)
         end
-        request(verb, response.headers['location'], opts)
+        request(verb, response.headers["location"], opts)
       when 200..299, 300..399
         # on non-redirecting 3xx statuses, just return the response
         response
@@ -126,18 +113,18 @@ module OAuth2
     # @param [Class] class of access token for easier subclassing OAuth2::AccessToken
     # @return [AccessToken] the initalized AccessToken
     def get_token(params, access_token_opts = {}, access_token_class = AccessToken)
-      opts = {:raise_errors => options[:raise_errors], :parse => params.delete(:parse)}
+      opts = { raise_errors: options[:raise_errors], parse: params.delete(:parse) }
       if options[:token_method] == :post
         headers = params.delete(:headers)
         opts[:body] = params
-        opts[:headers] =  {'Content-Type' => 'application/x-www-form-urlencoded'}
+        opts[:headers] =  { "Content-Type" => "application/x-www-form-urlencoded" }
         opts[:headers].merge!(headers) if headers
       else
         opts[:params] = params
       end
       response = request(options[:token_method], token_url, opts)
       error = Error.new(response)
-      fail(error) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed['access_token'])
+      fail(error) if options[:raise_errors] && !(response.parsed.is_a?(Hash) && response.parsed["access_token"])
       access_token_class.from_hash(self, response.parsed.merge(access_token_opts))
     end
 

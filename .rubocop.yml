@@ -1,55 +1,33 @@
-Metrics/BlockNesting:
-  Max: 2
-
-Metrics/LineLength:
-  AllowURI: true
+Lint/DuplicateMethods:
   Enabled: false
 
-Metrics/MethodLength:
-  CountComments: false
-  Max: 15
+Lint/UnusedMethodArgument:
+  Enabled: false
 
-Metrics/ParameterLists:
-  Max: 4
-  CountKeywordArgs: true
-
-Lint/UnusedBlockArgument:
-  Exclude:
-    - 'spec/**/*.rb'
+Metrics/LineLength:
+  Max: 120
 
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
 
-Style/CollectionMethods:
-  PreferredMethods:
-    map:      'collect'
-    reduce:   'inject'
-    find:     'detect'
-    find_all: 'select'
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
 
-Style/Documentation:
+Style/Blocks:
   Enabled: false
 
-Style/DotPosition:
-  EnforcedStyle: trailing
-
-Style/DoubleNegation:
+Style/MethodName:
   Enabled: false
 
-Style/EachWithObject:
+Style/RedundantSelf:
   Enabled: false
 
-Style/Encoding:
+Style/SingleSpaceBeforeFirstArg:
   Enabled: false
 
-Style/HashSyntax:
-  EnforcedStyle: hash_rockets
+Style/SpaceInsideBlockBraces:
+  SpaceBeforeBlockParameters: false
 
-Style/Lambda:
-  Enabled: false
-
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
-
-Style/TrailingComma:
-  EnforcedStyleForMultiline: 'comma'
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

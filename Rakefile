@@ -1,39 +1,30 @@
-require 'bundler'
-Bundler::GemHelper.install_tasks
+# -*- coding: utf-8 -*-
+$:.unshift("/Library/RubyMotion/lib")
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new(:spec)
-
-task :test => :spec
-
-namespace :doc do
-  require 'rdoc/task'
-  require File.expand_path('../lib/oauth2/version', __FILE__)
-  RDoc::Task.new do |rdoc|
-    rdoc.rdoc_dir = 'rdoc'
-    rdoc.title = "oauth2 #{OAuth2::Version}"
-    rdoc.main = 'README.md'
-    rdoc.rdoc_files.include('README.md', 'LICENSE.md', 'lib/**/*.rb')
-  end
+# Use `rake` to start the iOS app or
+# `rake osx=true` to start the OS X app.
+if ENV["osx"]
+  require "motion/project/template/osx"
+else
+  require "motion/project/template/ios"
 end
+require "./lib/oauth2"
 
 begin
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
+  require "bundler"
+  require "motion/project/template/gem/gem_tasks"
+  Bundler.require
 rescue LoadError
-  task :rubocop do
-    $stderr.puts 'RuboCop is disabled'
-  end
 end
 
-require 'yardstick/rake/measurement'
-Yardstick::Rake::Measurement.new do |measurement|
-  measurement.output = 'measurement/report.txt'
-end
+# Load the gems used for development
+require "guard/motion"
+require "motion_print"
+require "motion-redgreen"
+require "RackMotion"
+require "webstub"
 
-require 'yardstick/rake/verify'
-Yardstick::Rake::Verify.new do |verify|
-  verify.threshold = 58.8
+Motion::Project::App.setup do |app|
+  # Use `rake config' to see complete project settings.
+  app.name = "motion-oauth2"
 end
-
-task :default => [:spec, :rubocop, :verify_measurements]
