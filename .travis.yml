@@ -7,7 +7,9 @@ before_install:
 script:
     - bundle install
     - bundle exec rake pod:install
-    - bundle exec rake clean
     - bundle exec rake spec
-    - bundle exec rake clean
+    - rm -rf build/
+    - rm -rf vendor/build/
+    - rm -rf vendor/Pods/
+    - bundle exec rake pod:install osx=true
     - bundle exec rake spec osx=true
