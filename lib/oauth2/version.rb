@@ -8,7 +8,7 @@ module OAuth2
     class << self
       # @return [String]
       def to_s
-        [MAJOR, MINOR, PATCH, PRE].compact.join('.')
+        [MAJOR, MINOR, PATCH, PRE].compact.join(".")
       end
     end
   end

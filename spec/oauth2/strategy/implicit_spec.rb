@@ -1,28 +1,30 @@
-require 'helper'
-
 describe OAuth2::Strategy::Implicit do
-  let(:client) { OAuth2::Client.new('abc', 'def', :site => 'http://api.example.com') }
+  def client
+    @client ||= OAuth2::Client.new("abc", "def", site: "http://api.example.com")
+  end
 
-  subject { client.implicit }
+  def subject
+    @subject ||= client.implicit
+  end
 
-  describe '#authorize_url' do
-    it 'includes the client_id' do
-      expect(subject.authorize_url).to include('client_id=abc')
+  describe "#authorize_url" do
+    it "includes the client_id" do
+      subject.authorize_url.should.include("client_id=abc")
     end
 
-    it 'includes the type' do
-      expect(subject.authorize_url).to include('response_type=token')
+    it "includes the type" do
+      subject.authorize_url.should.include("response_type=token")
     end
 
-    it 'includes passed in options' do
-      cb = 'http://myserver.local/oauth/callback'
-      expect(subject.authorize_url(:redirect_uri => cb)).to include("redirect_uri=#{Rack::Utils.escape(cb)}")
+    it "includes passed in options" do
+      cb = "http://myserver.local/oauth/callback".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+      subject.authorize_url(redirect_uri: cb).should.include("redirect_uri=#{cb}")
     end
   end
 
-  describe '#get_token' do
-    it 'raises NotImplementedError' do
-      expect { subject.get_token }.to raise_error(NotImplementedError)
+  describe "#get_token" do
+    it "raises NotImplementedError" do
+      -> { subject.get_token }.should.raise(NotImplementedError)
     end
   end
 end
