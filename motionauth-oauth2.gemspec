@@ -2,13 +2,13 @@
 require File.expand_path("../lib/oauth2/version", __FILE__)
 
 Gem::Specification.new do |spec|
-  spec.name          = "motion-oauth2"
+  spec.name          = "motionauth-oauth2"
   spec.version       = OAuth2::Version
   spec.authors       = ["Brian Pattison", "Michael Bleigh", "Erik Michaels-Ober"]
   spec.email         = ["brian@brianpattison.com", "michael@intridea.com", "sferik@gmail.com"]
   spec.description   = "A RubyMotion wrapper for the OAuth 2.0 protocol built with a similar style to the original OAuth spec."
   spec.summary       = "A RubyMotion wrapper for the OAuth 2.0 protocol."
-  spec.homepage      = "https://github.com/motionauth/motion-oauth2"
+  spec.homepage      = "https://github.com/motionauth/oauth2"
   spec.license       = "MIT"
 
   files = []
@@ -28,5 +28,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "RackMotion", "~> 0.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "terminal-notifier-guard", "~> 1.6"
-  spec.add_development_dependency "webstub"
 end

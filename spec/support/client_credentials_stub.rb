@@ -36,25 +36,6 @@ class ClientCredentialsStub
     return status, headers, data
   end
 
-  # stub.post('/oauth/token', 'grant_type' => 'client_credentials') do |env|
-  #   client_id, client_secret = Base64.decode64().split(':', 2)
-  #   client_id == 'abc' && client_secret == 'def' || fail(Faraday::Adapter::Test::Stubs::NotFound)
-  #   case @mode
-  #   when 'formencoded'
-  #     [200, {'Content-Type' => 'application/x-www-form-urlencoded'}, kvform_token]
-  #   when 'json'
-  #     [200, {'Content-Type' => 'application/json'}, json_token]
-  #   end
-  # end
-  # stub.post('/oauth/token', 'client_id' => 'abc', 'client_secret' => 'def', 'grant_type' => 'client_credentials') do |env|
-  #   case @mode
-  #   when 'formencoded'
-  #     [200, {'Content-Type' => 'application/x-www-form-urlencoded'}, kvform_token]
-  #   when 'json'
-  #     [200, {'Content-Type' => 'application/json'}, json_token]
-  #   end
-  # end
-
   def kvform_token
     @kvform_token ||= "expires_in=600&access_token=salmon&refresh_token=trout"
   end
