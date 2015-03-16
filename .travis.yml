@@ -9,6 +9,4 @@ script:
     - bundle exec rake pod:install
     - bundle exec rake clean
     - bundle exec rake spec
-    - bundle exec rake pod:install osx=true
-    - bundle exec rake clean osx=true
     - bundle exec rake spec osx=true
