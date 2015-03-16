@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    motion-oauth2 (1.0.0)
+    motionauth-oauth2 (1.0.0)
       motion-cocoapods (~> 1.7)
       motion-support (~> 0.2)
 
@@ -95,7 +95,6 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    webstub (1.1.2)
     xcodeproj (0.23.0)
       activesupport (>= 3)
       colored (~> 1.2)
@@ -107,9 +106,8 @@ DEPENDENCIES
   RackMotion (~> 0.3)
   guard (~> 2.6.1)
   guard-motion (~> 0.1)
-  motion-oauth2!
   motion-redgreen (~> 1.0)
   motion_print (~> 0.0)
+  motionauth-oauth2!
   rake
   terminal-notifier-guard (~> 1.6)
-  webstub
