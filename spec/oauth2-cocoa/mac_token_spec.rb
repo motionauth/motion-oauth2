@@ -1,6 +1,4 @@
 describe OAuth2::MACToken do
-  extend WebStub::SpecHelpers
-
   def client
     @client ||= OAuth2::Client.new("abc", "def", site: "https://api.example.com")
   end
