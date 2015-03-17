@@ -1,4 +1,4 @@
-# OAuth2
+# MotionAuth-OAuth2
 
 [![Build Status](https://travis-ci.org/motionauth/oauth2.svg)](https://travis-ci.org/motionauth/oauth2)
 [![Code Climate](https://codeclimate.com/github/motionauth/oauth2/badges/gpa.svg)](https://codeclimate.com/github/motionauth/oauth2)
