@@ -11,7 +11,7 @@ A [RubyMotion](http://www.rubymotion.com) fork of the existing
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "motion-oauth2"
+gem "motionauth-oauth2"
 ```
 
 And then execute:
@@ -23,7 +23,7 @@ $ bundle
 Or install it yourself as:
 
 ```bash
-$ gem install motion-oauth2
+$ gem install motionauth-oauth2
 ```
 
 ## Usage Examples
