@@ -11,5 +11,5 @@ script:
     - rm -rf build/
     - rm -rf vendor/build/
     - rm -rf vendor/Pods/
-    - bundle exec rake pod:install osx=true
+    - bundle exec rake pod:install osx=true > /dev/null
     - bundle exec rake spec osx=true
