@@ -90,7 +90,7 @@ module OAuth2
 
       if body
         body = Utils.query_from_params(body) if body.is_a?(Hash)
-        request.setHTTPBody(body)
+        request.setHTTPBody(body.dataUsingEncoding(NSUTF8StringEncoding))
       end
 
       if headers
