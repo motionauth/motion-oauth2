@@ -13,7 +13,7 @@ class AccessTokenStub
     when "https://api.example.com/token/query?access_token=#{token}"
       data = request.URL.query.split("=").last.to_data
     when "https://api.example.com/token/body"
-      data = request.HTTPBody.to_data
+      data = request.HTTPBody
     when "https://api.example.com/oauth/token"
       data = refresh_body.to_data
       headers = { "Content-Type" => "application/json" }
