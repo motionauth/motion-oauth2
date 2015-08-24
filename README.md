@@ -8,7 +8,7 @@ A [RubyMotion](http://www.rubymotion.com) fork of the existing
 
 ## WARNING
 
-This is an experiment. You're more than welcome to use it in an app if everything works for you, but updates will not be a priority.
+This is an experiment. You're more than welcome to use it in an app if everything works for you, but updates will not be a priority. I just decided to share the code with the world because why not!? :)
 
 ## Installation
 
