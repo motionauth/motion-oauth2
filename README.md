@@ -6,6 +6,10 @@
 A [RubyMotion](http://www.rubymotion.com) fork of the existing
 [OAuth2](https://github.com/intridea/oauth2) RubyGem that works for iOS and OS X.
 
+## WARNING
+
+This is an experiment. You're more than welcome to use it in an app if everything works for you, but updates will not be a priority.
+
 ## Installation
 
 Add this line to your application's Gemfile:
